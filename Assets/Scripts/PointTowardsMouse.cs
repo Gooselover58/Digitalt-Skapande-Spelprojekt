@@ -7,19 +7,14 @@ public class PointTowardsMouse : MonoBehaviour
     public Camera cam;
     public GameObject player;
     [SerializeField] Vector2 offset;
-    private Rigidbody2D rb;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    [SerializeField] float clampRot;
 
     void Update()
     {
         transform.position = (Vector2)player.transform.position + offset;
         Vector2 mouse = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 Dir = mouse - (Vector2)transform.position;
-        float angle = Mathf.Atan2(Dir.y, Dir.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Clamp(Mathf.Atan2(Dir.y, Dir.x) * Mathf.Rad2Deg, -clampRot, clampRot);
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
