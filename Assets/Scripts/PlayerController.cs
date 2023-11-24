@@ -6,11 +6,16 @@ public class PlayerController : MonoBehaviour
 {
 
     private Rigidbody2D rb;
-    [SerializeField] float speed;
+    private bool canShoot;
+    [SerializeField] Animator anim;
+    [SerializeField] ParticleSystem shootPart;
+    [SerializeField] float moveSpeed;
+    [SerializeField] float coolDown;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        canShoot = true;
     }
 
     void FixedUpdate()
@@ -19,6 +24,28 @@ public class PlayerController : MonoBehaviour
         //Värdet ökar när man trycker upp, och minskar när man trycker ner
         float y = Input.GetAxisRaw("Vertical");
         Vector2 movement = new Vector2(0, y);
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
+        {
+            StartCoroutine("ShootAndCool");
+        }
+    }
+
+    IEnumerator ShootAndCool()
+    {
+        canShoot = false;
+        Shoot();
+        yield return new WaitForSeconds(coolDown);
+        canShoot = true;
+    }
+
+    void Shoot()
+    {
+        shootPart.Play();
+        anim.SetTrigger("ShootAnim");
     }
 }
