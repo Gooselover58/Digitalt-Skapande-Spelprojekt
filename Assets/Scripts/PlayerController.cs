@@ -7,10 +7,9 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool canShoot;
-    [SerializeField] Animator anim;
-    [SerializeField] ParticleSystem shootPart;
     [SerializeField] float moveSpeed;
     [SerializeField] float coolDown;
+    public Weapon currentGun;
 
     void Start()
     {
@@ -38,14 +37,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator ShootAndCool()
     {
         canShoot = false;
-        Shoot();
+        currentGun.Shoot();
         yield return new WaitForSeconds(coolDown);
         canShoot = true;
-    }
-
-    void Shoot()
-    {
-        shootPart.Play();
-        anim.SetTrigger("ShootAnim");
     }
 }
