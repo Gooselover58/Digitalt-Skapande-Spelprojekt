@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        anim.SetTrigger("ShootAnim");
         shootPart.Play();
+        anim.SetTrigger("ShootAnim");
     }
 }
