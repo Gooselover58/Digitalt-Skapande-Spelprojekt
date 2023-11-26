@@ -8,11 +8,12 @@ public class Weapon : MonoBehaviour
     private GameObject shootPoint;
     private ParticleSystem shootPar;
     [SerializeField] Rigidbody2D pivotRb;
+    [SerializeField] Animator shootAnim;
     [SerializeField] float coolDown;
     [SerializeField] float damage;
     [SerializeField] float spread;
     [SerializeField] int bulletAmount;
-    [SerializeField] GameObject bullet;
+    [SerializeField] BulletPool bPool;
 
     void Start()
     {
@@ -24,10 +25,29 @@ public class Weapon : MonoBehaviour
     {
         for (int i = 0; i < bulletAmount; i++)
         {
-            float dir = Random.Range(-spread, spread); 
-            GameObject newBullet = Instantiate(bullet, shootPoint.transform.position, transform.rotation);
-            newBullet.GetComponent<Rigidbody2D>().rotation = pivotRb.rotation + dir;
-            newBullet.name = "Bullet";
+            bool foundBullet = false;
+            float dir = Random.Range(-spread, spread);
+            foreach (GameObject b in bPool.bullets)
+            {
+                if (!b.activeSelf)
+                {
+                    foundBullet = true;
+                    b.SetActive(true);
+                    ShotEffects();
+                    break;
+                }
+            }
+            if (!foundBullet)
+            {
+                bPool.CreateIBullet(1, true);
+                ShotEffects();
+            }
         }
+    }
+
+    void ShotEffects()
+    {
+        shootPar.Play();
+        shootAnim.SetTrigger("ShootAnim");
     }
 }
