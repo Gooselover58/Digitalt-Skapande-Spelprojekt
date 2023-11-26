@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private ParticleSystem shootPar;
     private GameObject shootPoint;
-    private Rigidbody2D rb;
-    public float coolDown;
-    public float damage;
-    public float spread;
-    public int bulletAmount;
-    public GameObject bullet;
+    private ParticleSystem shootPar;
+    [SerializeField] Rigidbody2D pivotRb;
+    [SerializeField] float coolDown;
+    [SerializeField] float damage;
+    [SerializeField] float spread;
+    [SerializeField] int bulletAmount;
+    [SerializeField] GameObject bullet;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        shootPoint = transform.GetChild(0).transform.GetChild(0).gameObject;
-        shootPar = transform.GetChild(0).transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
-
+        shootPoint = transform.GetChild(0).gameObject;
+        shootPar = transform.GetChild(1).GetComponent<ParticleSystem>();
     }
 
     public void Shoot() 
@@ -28,16 +26,8 @@ public class Weapon : MonoBehaviour
         {
             float dir = Random.Range(-spread, spread); 
             GameObject newBullet = Instantiate(bullet, shootPoint.transform.position, transform.rotation);
-            newBullet.GetComponent<Rigidbody2D>().rotation = rb.rotation + dir;
+            newBullet.GetComponent<Rigidbody2D>().rotation = pivotRb.rotation + dir;
             newBullet.name = "Bullet";
         }
-    }
-}
-
-class Handgun : Weapon
-{
-    void Awake()
-    {
-
     }
 }
