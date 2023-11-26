@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] float coolDown;
     [SerializeField] float damage;
     [SerializeField] float spread;
+    [SerializeField] float bulletSpeed;
     [SerializeField] int bulletAmount;
     [SerializeField] BulletPool bPool;
 
@@ -26,24 +27,26 @@ public class Weapon : MonoBehaviour
         for (int i = 0; i < bulletAmount; i++)
         {
             bool foundBullet = false;
-            float dir = Random.Range(-spread, spread);
             foreach (GameObject b in bPool.bullets)
             {
                 if (!b.activeSelf)
                 {
                     foundBullet = true;
-                    b.GetComponent<BulletScript>().angle = dir;
+                    BulletScript bs = b.GetComponent<BulletScript>();
+                    bs.angle = spread;
+                    bs.startPos = shootPoint.transform.position;
+                    bs.speed = bulletSpeed;
+                    bs.initAngle = pivotRb.rotation;
                     b.SetActive(true);
-                    ShotEffects();
                     break;
                 }
             }
             if (!foundBullet)
             {
-                bPool.CreateIBullet(1, true, dir);
-                ShotEffects();
+                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb);
             }
         }
+        ShotEffects();
     }
 
     void ShotEffects()

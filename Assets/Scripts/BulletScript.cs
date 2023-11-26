@@ -5,12 +5,23 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField] PlayerController pc;
+    public float speed;
+    public Vector2 startPos;
+    public float initAngle;
     public float angle;
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
-        transform.position = pc.currentGun.shootPoint.transform.position;
-        rb.rotation = angle;
+        transform.position = startPos;
+        rb.rotation = initAngle + Random.Range(-angle, angle);
+    }
+
+    void FixedUpdate()
+    {
+        if (!GetComponent<SpriteRenderer>().isVisible)
+        {
+            gameObject.SetActive(false);
+        }
+        rb.MovePosition(rb.position + (Vector2)transform.right * speed * Time.fixedDeltaTime);
     }
 }

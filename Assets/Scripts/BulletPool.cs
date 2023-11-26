@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BulletPool : MonoBehaviour
 {
@@ -11,17 +12,24 @@ public class BulletPool : MonoBehaviour
 
     void Start()
     {
-        CreateIBullet(bulletAmount, false, 0);
+        CreateIBullet(bulletAmount, false, 0, Vector2.zero, 0, null);
     }
 
     //false = Bullet won't activate
     //true = Bullet will be activated
-    public void CreateIBullet(int amount, bool active, float angle)
+    public void CreateIBullet(int amount, bool active, float angle, Vector2 pos, float speed, Rigidbody2D rb)
     {
         for (int i = 0; i < amount; i++)
         {
             GameObject newBullet = Instantiate(bulletOb, bulletOb.transform.position, Quaternion.identity, transform);
-            newBullet.GetComponent<BulletScript>().angle = angle;
+            BulletScript bs = newBullet.GetComponent<BulletScript>();
+            bs.angle = angle;
+            bs.startPos = pos;
+            bs.speed = speed;
+            if (rb != null)
+            {
+                bs.initAngle = rb.rotation;
+            }
             newBullet.SetActive(active);
             bullets.Add(newBullet);
         }
