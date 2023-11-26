@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     private Rigidbody2D rb;
     private bool canShoot;
     [SerializeField] float moveSpeed;

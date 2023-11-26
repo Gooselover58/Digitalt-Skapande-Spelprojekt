@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private GameObject shootPoint;
+    public GameObject shootPoint;
     private ParticleSystem shootPar;
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
@@ -32,6 +32,7 @@ public class Weapon : MonoBehaviour
                 if (!b.activeSelf)
                 {
                     foundBullet = true;
+                    b.GetComponent<BulletScript>().angle = dir;
                     b.SetActive(true);
                     ShotEffects();
                     break;
@@ -39,7 +40,7 @@ public class Weapon : MonoBehaviour
             }
             if (!foundBullet)
             {
-                bPool.CreateIBullet(1, true);
+                bPool.CreateIBullet(1, true, dir);
                 ShotEffects();
             }
         }

@@ -11,16 +11,17 @@ public class BulletPool : MonoBehaviour
 
     void Start()
     {
-        CreateIBullet(bulletAmount, false);
+        CreateIBullet(bulletAmount, false, 0);
     }
 
     //false = Bullet won't activate
     //true = Bullet will be activated
-    public void CreateIBullet(int amount, bool active)
+    public void CreateIBullet(int amount, bool active, float angle)
     {
         for (int i = 0; i < amount; i++)
         {
             GameObject newBullet = Instantiate(bulletOb, bulletOb.transform.position, Quaternion.identity, transform);
+            newBullet.GetComponent<BulletScript>().angle = angle;
             newBullet.SetActive(active);
             bullets.Add(newBullet);
         }

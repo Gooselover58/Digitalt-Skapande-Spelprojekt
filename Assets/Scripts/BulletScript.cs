@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    private Rigidbody2D rb;
+    [SerializeField] PlayerController pc;
+    public float angle;
     void OnEnable()
     {
-        StartCoroutine("die");
-    }
-
-    IEnumerator die()
-    {
-        yield return new WaitForSeconds(15);
-        gameObject.SetActive(false);
+        rb = GetComponent<Rigidbody2D>();
+        transform.position = pc.currentGun.shootPoint.transform.position;
+        rb.rotation = angle;
     }
 }
