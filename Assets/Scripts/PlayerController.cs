@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
+        if (Input.GetKey(KeyCode.Space) && canShoot)
         {
             StartCoroutine("ShootAndCool");
         }

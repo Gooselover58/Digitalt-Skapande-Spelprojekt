@@ -9,6 +9,7 @@ public class BulletScript : MonoBehaviour
     public Vector2 startPos;
     public float initAngle;
     public float angle;
+    public int damage;
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,7 +30,7 @@ public class BulletScript : MonoBehaviour
     {
         if (col.gameObject.GetComponent<EnemyScript>() != null)
         {
-            
+            col.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
         }
     }
 }
