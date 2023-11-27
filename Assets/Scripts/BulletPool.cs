@@ -21,7 +21,7 @@ public class BulletPool : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject newBullet = Instantiate(bulletOb, bulletOb.transform.position, Quaternion.identity, transform);
+            GameObject newBullet = Instantiate(bulletOb, transform.position, Quaternion.identity, transform);
             BulletScript bs = newBullet.GetComponent<BulletScript>();
             bs.angle = angle;
             bs.startPos = pos;

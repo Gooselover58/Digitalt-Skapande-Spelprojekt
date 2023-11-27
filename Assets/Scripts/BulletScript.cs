@@ -24,4 +24,12 @@ public class BulletScript : MonoBehaviour
         }
         rb.MovePosition(rb.position + (Vector2)transform.right * speed * Time.fixedDeltaTime);
     }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.GetComponent<EnemyScript>() != null)
+        {
+            
+        }
+    }
 }
