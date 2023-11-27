@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    private int health;
+    [SerializeField] int health;
+
+    void OnEnable()
+    {
+        
+    }
+
+    private void Update()
+    {
+        if (health < 1)
+        {
+            gameObject.SetActive(false);
+        }
+    }
     public void TakeDamage(int amount)
     {
 

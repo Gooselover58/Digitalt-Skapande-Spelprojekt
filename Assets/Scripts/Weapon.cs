@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
     [SerializeField] float coolDown;
-    [SerializeField] float damage;
+    [SerializeField] int damage;
     [SerializeField] float spread;
     [SerializeField] float bulletSpeed;
     [SerializeField] int bulletAmount;
@@ -37,13 +37,14 @@ public class Weapon : MonoBehaviour
                     bs.startPos = shootPoint.transform.position;
                     bs.speed = bulletSpeed;
                     bs.initAngle = pivotRb.rotation;
+                    bs.damage = damage;
                     b.SetActive(true);
                     break;
                 }
             }
             if (!foundBullet)
             {
-                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb);
+                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage);
             }
         }
         ShotEffects();
