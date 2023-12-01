@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         shootPoint = transform.GetChild(0).gameObject;
+        shootPar = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
     }
 
     public void Shoot() 

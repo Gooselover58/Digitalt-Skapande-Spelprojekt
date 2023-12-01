@@ -40,6 +40,7 @@ public class EnemyPool : MonoBehaviour
             {
                 foundEnemy = true;
                 en.SetActive(true);
+                newY = Random.Range(-y, y);
                 en.gameObject.transform.position = new Vector3(x, newY, 0);
                 break;
             }

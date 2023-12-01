@@ -8,11 +8,14 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float speed;
     private int health;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
     void OnEnable()
     {
         health = initialHealth;
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        sr.color = Color.white;
     }
 
     private void Update()
@@ -30,6 +33,15 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        Debug.Log("D");
         health -= amount;
+        StartCoroutine("Flash");
+    }
+
+    IEnumerator Flash()
+    {
+        sr.color = Color.grey;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
     }
 }
