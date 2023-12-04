@@ -6,7 +6,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject shootPoint;
-    private ParticleSystem shootPar;
+    [SerializeField] ParticleSystem shootPar;
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
     [SerializeField] float coolDown;
@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         shootPoint = transform.GetChild(0).gameObject;
-        shootPar = transform.GetChild(1).GetComponent<ParticleSystem>();
+        shootPar = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
     }
 
     public void Shoot() 
