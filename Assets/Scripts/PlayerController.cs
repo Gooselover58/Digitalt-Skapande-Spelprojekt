@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,17 +7,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool canShoot;
     [SerializeField] float moveSpeed;
-    [SerializeField] Weapon startWeapon;
-    public List<Weapon> weapons;
+    [SerializeField] float coolDown;
     public Weapon currentGun;
 
     void Start()
     {
-        currentGun = startWeapon;
-        weapons.Add(startWeapon);
         rb = GetComponent<Rigidbody2D>();
         canShoot = true;
-        
     }
 
     void FixedUpdate()
@@ -36,22 +31,13 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine("ShootAndCool");
         }
-        if (Input.GetKeyDown("4"))
-        {
-            Debug.Log("Key 4 pressed");
-        }
     }
 
     IEnumerator ShootAndCool()
     {
         canShoot = false;
         currentGun.Shoot();
-        yield return new WaitForSeconds(currentGun.coolDown);
+        yield return new WaitForSeconds(coolDown);
         canShoot = true;
-    }
-    
-    void SwitchGun()
-    {
-        
     }
 }
