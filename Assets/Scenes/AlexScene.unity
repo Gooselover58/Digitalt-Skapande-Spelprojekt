@@ -5275,7 +5275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d1ef1c1124a19647b3772cecb0899b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   isGameActive: 0
 --- !u!4 &589201632
 Transform:
@@ -5292,9 +5291,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
-  health: 0
->>>>>>> Stashed changes
 --- !u!1 &888145559
 GameObject:
   m_ObjectHideFlags: 0
