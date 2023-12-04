@@ -8,12 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool canShoot;
     [SerializeField] float moveSpeed;
-<<<<<<< Updated upstream
     [SerializeField] Weapon startWeapon;
     public List<Weapon> weapons;
-=======
-    [SerializeField] float coolDown;
->>>>>>> Stashed changes
     public Weapon currentGun;
 
     void Start()
@@ -50,7 +46,6 @@ public class PlayerController : MonoBehaviour
     {
         canShoot = false;
         currentGun.Shoot();
-<<<<<<< Updated upstream
         yield return new WaitForSeconds(currentGun.coolDown);
         canShoot = true;
     }
@@ -59,9 +54,4 @@ public class PlayerController : MonoBehaviour
     {
         
     }
-=======
-        yield return new WaitForSeconds(coolDown);
-        canShoot = true;
-    }
->>>>>>> Stashed changes
 }
