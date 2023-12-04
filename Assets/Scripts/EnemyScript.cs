@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+<<<<<<< Updated upstream
     [SerializeField] int initialHealth;
     [SerializeField] float speed;
     private int health;
@@ -50,5 +51,11 @@ public class EnemyScript : MonoBehaviour
         sr.color = Color.grey;
         yield return new WaitForSeconds(0.1f);
         sr.color = Color.white;
+=======
+    private int health;
+    public void TakeDamage(int amount)
+    {
+
+>>>>>>> Stashed changes
     }
 }
