@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         weapons.Add(startWeapon);
         rb = GetComponent<Rigidbody2D>();
         canShoot = true;
-        
+        SwitchGun(1);
     }
 
     void FixedUpdate()
@@ -36,9 +36,12 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine("ShootAndCool");
         }
-        if (Input.GetKeyDown("4"))
+        for (int i = 1; i < weapons.Count + 1; i++)
         {
-            Debug.Log("Key 4 pressed");
+            if (Input.GetKeyDown("" + i))
+            {
+                SwitchGun(i);
+            }
         }
     }
 
@@ -50,8 +53,13 @@ public class PlayerController : MonoBehaviour
         canShoot = true;
     }
     
-    void SwitchGun()
+    void SwitchGun(int whichGun)
     {
-        
+        foreach (Weapon w in weapons)
+        {
+            w.gameObject.SetActive(false);
+        }
+        weapons[whichGun - 1].gameObject.SetActive(true); 
+        currentGun = weapons[whichGun - 1];
     }
 }

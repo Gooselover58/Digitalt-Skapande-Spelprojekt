@@ -16,14 +16,37 @@ public class Weapon : MonoBehaviour
     [SerializeField] float bulletSpeed;
     [SerializeField] int bulletAmount;
     [SerializeField] BulletPool bPool;
+    [SerializeField] LayerMask layer;
+    private LineRenderer lr;
+    private Camera cam;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         shootPoint = transform.GetChild(0).gameObject;
         shootPar = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
+        lr = GetComponent<LineRenderer>();
+        cam = Camera.main;
     }
 
+    void Update()
+    {
+        if (lr != null)
+        {
+            Vector2 dir = transform.position - cam.ScreenToWorldPoint(Input.mousePosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(shootPoint.transform.position, -dir, 100, layer);
+
+            if (hit.collider != null)
+            {
+                DrawLine(shootPoint.transform.position, hit.point);
+            }
+            else
+            {
+                DrawLine(shootPoint.transform.position, -dir.normalized * 100);
+            }
+        }
+    }
     public void Shoot() 
     {
         for (int i = 0; i < bulletAmount; i++)
@@ -57,5 +80,12 @@ public class Weapon : MonoBehaviour
         audioSource.Play();
         shootPar.Play();
         shootAnim.SetTrigger("ShootAnim");
+    }
+
+    void DrawLine(Vector2 startPos, Vector2 endPos)
+    {
+        lr.positionCount = 2;
+        lr.SetPosition(0, startPos);
+        lr.SetPosition(1, endPos);
     }
 }

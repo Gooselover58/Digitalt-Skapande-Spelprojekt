@@ -9,16 +9,18 @@ public class EnemyScript : MonoBehaviour
     private int health;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private AudioSource deathSound;
 
     void OnEnable()
     {
         health = initialHealth;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        deathSound = GetComponent<AudioSource>();
         sr.color = Color.white;
     }
 
-    private void Update()
+    void Update()
     {
         if (health < 1 || !GetComponent<SpriteRenderer>().isVisible)
         {
