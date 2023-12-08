@@ -6,10 +6,11 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject shootPoint;
+    private AudioSource shootSound;
     [SerializeField] ParticleSystem shootPar;
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
-    [SerializeField] float coolDown;
+    public float coolDown;
     [SerializeField] int damage;
     [SerializeField] float spread;
     [SerializeField] float bulletSpeed;
@@ -21,6 +22,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+        shootSound = GetComponent<AudioSource>();
         shootPoint = transform.GetChild(0).gameObject;
         shootPar = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
         lr = GetComponent<LineRenderer>();
@@ -75,6 +77,7 @@ public class Weapon : MonoBehaviour
 
     void ShotEffects()
     {
+        shootSound.Play();
         shootPar.Play();
         shootAnim.SetTrigger("ShootAnim");
     }

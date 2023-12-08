@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -22,9 +23,11 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        if (health < 1 || !GetComponent<SpriteRenderer>().isVisible)
+        if (health < 1)
         {
-            gameObject.SetActive(false);
+            health = 2;
+            sr.enabled = false;
+            StartCoroutine("Death");
         }
     }
 
@@ -35,7 +38,7 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("D");
+        deathSound.Play();
         health -= amount;
         StartCoroutine("Flash");
     }
@@ -45,5 +48,12 @@ public class EnemyScript : MonoBehaviour
         sr.color = Color.grey;
         yield return new WaitForSeconds(0.1f);
         sr.color = Color.white;
+    }
+
+    IEnumerator Death()
+    {
+        deathSound.Play();
+        yield return new WaitUntil(() => deathSound.isPlaying == false);
+        gameObject.SetActive(false);
     }
 }
