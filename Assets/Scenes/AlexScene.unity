@@ -5191,19 +5191,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 0}
-  coolDown: 1
-  audioSource: {fileID: 0}
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 182421253}
+  coolDown: 1
   damage: 20
   spread: 0
   bulletSpeed: 10
   bulletAmount: 1
   bPool: {fileID: 1984755081}
-  layer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!82 &182421257
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5627,8 +5623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  startWeapon: {fileID: 958506762}
-  weapons: []
+  coolDown: 0
   currentGun: {fileID: 958506762}
 --- !u!1 &958506760
 GameObject:
@@ -5682,19 +5677,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 0}
-  coolDown: 0.5
-  audioSource: {fileID: 0}
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 958506764}
+  coolDown: 0.5
   damage: 50
   spread: 0
   bulletSpeed: 50
   bulletAmount: 1
   bPool: {fileID: 1984755081}
-  layer:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!82 &958506763
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6046,19 +6037,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 0}
-  coolDown: 1
-  audioSource: {fileID: 0}
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 990602865}
+  coolDown: 1
   damage: 20
   spread: 10
   bulletSpeed: 15
   bulletAmount: 7
   bPool: {fileID: 1984755081}
-  layer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &990602863
 Rigidbody2D:
   serializedVersion: 4
