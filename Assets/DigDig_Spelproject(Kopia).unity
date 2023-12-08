@@ -5060,7 +5060,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &182421252
 Transform:
   m_ObjectHideFlags: 0
@@ -5191,11 +5191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 0}
-  coolDown: 1
-  audioSource: {fileID: 0}
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 182421253}
+  coolDown: 1
   damage: 20
   spread: 0
   bulletSpeed: 10
@@ -5536,7 +5535,7 @@ Transform:
   m_GameObject: {fileID: 888145559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.6, y: 0.8483782, z: 0}
+  m_LocalPosition: {x: -7.6, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5682,11 +5681,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 0}
-  coolDown: 0.5
-  audioSource: {fileID: 0}
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 958506764}
+  coolDown: 0.5
   damage: 50
   spread: 0
   bulletSpeed: 50
@@ -5694,7 +5692,7 @@ MonoBehaviour:
   bPool: {fileID: 1984755081}
   layer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
 --- !u!82 &958506763
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6046,11 +6044,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 0}
-  coolDown: 1
-  audioSource: {fileID: 0}
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 990602865}
+  coolDown: 1
   damage: 20
   spread: 10
   bulletSpeed: 15
