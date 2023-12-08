@@ -9,6 +9,7 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] GameManager gm;
     [SerializeField] int amount;
     [SerializeField] float spawnInterval;
+    [SerializeField] float timeBonus;
     [SerializeField] float x;
     [SerializeField] float y;
     private float newY;
@@ -29,6 +30,7 @@ public class EnemyPool : MonoBehaviour
         enemies.Add(newEnemy);
         newEnemy.SetActive(state);
         newEnemy.name = "Enemy";
+        newEnemy.GetComponent<EnemyScript>().deathSound = GetComponent<AudioSource>();
     }
 
     void spawnEnemy()
@@ -55,7 +57,7 @@ public class EnemyPool : MonoBehaviour
     {
         while (gm.isGameActive)
         {
-            float rand = Random.Range(spawnInterval, spawnInterval + 3);
+            float rand = Random.Range(spawnInterval, spawnInterval + (timeBonus - (gm.time / 100)));
             yield return new WaitForSeconds(rand);
             spawnEnemy();
         }
