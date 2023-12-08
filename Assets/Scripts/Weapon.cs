@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] ParticleSystem shootPar;
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
-    [SerializeField] float coolDown;
+    public float coolDown;
     [SerializeField] int damage;
     [SerializeField] float spread;
     [SerializeField] float bulletSpeed;
