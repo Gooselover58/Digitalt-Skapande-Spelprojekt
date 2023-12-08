@@ -17,13 +17,6 @@ public class BulletScript : MonoBehaviour
         rb.rotation = initAngle + Random.Range(-angle, angle);
     }
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        transform.position = startPos;
-        rb.rotation = initAngle + Random.Range(-angle, angle);
-    }
-
     void FixedUpdate()
     {
         if (!GetComponent<SpriteRenderer>().isVisible)
@@ -33,11 +26,11 @@ public class BulletScript : MonoBehaviour
         rb.MovePosition(rb.position + (Vector2)transform.right * speed * Time.fixedDeltaTime);
     }
 
-    /*void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.GetComponent<EnemyScript>() != null)
         {
             col.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
         }
-    }*/
+    }
 }

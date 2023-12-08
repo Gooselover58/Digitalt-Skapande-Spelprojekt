@@ -33,16 +33,9 @@ public class EnemyScript : MonoBehaviour
         rb.MovePosition(rb.position + Vector2.left * speed * Time.fixedDeltaTime);
     }
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.GetComponent<BulletScript>() != null)
-        {
-            TakeDamage(col.gameObject.GetComponent<BulletScript>().damage);
-            col.gameObject.SetActive(false);
-        }
-    }
     public void TakeDamage(int amount)
     {
+        Debug.Log("D");
         health -= amount;
         StartCoroutine("Flash");
     }
