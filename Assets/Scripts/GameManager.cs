@@ -6,6 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject shopUI;
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] List<Weapon> weaponsForSale;
     [SerializeField] List<Button> buttons;
@@ -16,10 +17,12 @@ public class GameManager : MonoBehaviour
     public int coins;
     void Start()
     {
+        Time.timeScale = 1;
         for (int i = 0; i < weaponsForSale.Count; i++)
         {
-            buttons[0].onClick.AddListener(() => BuyGun(weaponsForSale[i], weaponsForSale[i].price));
+            SetUpGuns(i);
         }
+        shopUI.SetActive(false);
         isGameActive = true;
         lives = 3;
         coins = 0;
@@ -37,11 +40,20 @@ public class GameManager : MonoBehaviour
         {
             KillYourself();
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            OpenShop();
+        }
     }
 
     void KillYourself()
     {
         lives = 0;
+    }
+
+    void SetUpGuns(int num)
+    {
+        buttons[num].onClick.AddListener(() => BuyGun(weaponsForSale[num], weaponsForSale[num].price));
     }
 
     public void BuyGun(Weapon GunToBuy, int price)
@@ -52,5 +64,19 @@ public class GameManager : MonoBehaviour
             pc.weapons.Add(GunToBuy);
             pc.SwitchGun(pc.weapons.Count - 1);
         }
+    }
+
+    public void OpenShop()
+    {
+        isGameActive = false;
+        Time.timeScale = 0;
+        shopUI.SetActive(true);
+    }
+
+    public void CloseShop()
+    {
+        isGameActive = true;
+        Time.timeScale = 1;
+        shopUI.SetActive(false);
     }
 }

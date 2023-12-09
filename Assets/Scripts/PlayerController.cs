@@ -35,13 +35,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && canShoot)
+        if (Input.GetKey(KeyCode.Space) && canShoot && gm.isGameActive)
         {
             StartCoroutine("ShootAndCool");
         }
         for (int i = 1; i < weapons.Count + 1; i++)
         {
-            if (Input.GetKeyDown("" + i))
+            if (Input.GetKeyDown("" + i) && gm.isGameActive)
             {
                 SwitchGun(i);
             }
