@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
     public float coolDown;
+    public int price;
     [SerializeField] bool piercing;
     [SerializeField] int damage;
     [SerializeField] float spread;

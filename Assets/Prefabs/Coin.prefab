@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 401754685557177964}
   - component: {fileID: 8099721050600799162}
   - component: {fileID: 4562765601772282427}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -172,7 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc45229a00df3b4589439225b667147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  dir: {x: 0, y: 0}
+  speed: 8
   force: 5
   player: {fileID: 0}
 --- !u!1 &2936706838998021190
@@ -185,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2704980246338201667}
   - component: {fileID: 8157767554623844858}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

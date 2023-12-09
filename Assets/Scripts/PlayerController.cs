@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             weap.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
-    void SwitchGun(int whichGun)
+    public void SwitchGun(int whichGun)
     {
         foreach (Weapon w in weapons)
         {
