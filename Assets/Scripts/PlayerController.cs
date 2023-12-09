@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private bool canShoot;
+    [SerializeField] GameManager gm;
     [SerializeField] float moveSpeed;
     [SerializeField] Weapon startWeapon;
     public List<Weapon> weapons;
@@ -71,5 +72,14 @@ public class PlayerController : MonoBehaviour
         }
         weapons[whichGun - 1].gameObject.SetActive(true); 
         currentGun = weapons[whichGun - 1];
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.GetComponent<CoinScript>() != null)
+        {
+            Destroy(col.gameObject);
+            gm.coins++;
+        }
     }
 }

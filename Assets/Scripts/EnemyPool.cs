@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     List<GameObject> enemies = new List<GameObject>();
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject coinOb;
     [SerializeField] GameObject enemyOb;
     [SerializeField] GameManager gm;
     [SerializeField] int amount;
@@ -30,8 +32,11 @@ public class EnemyPool : MonoBehaviour
         enemies.Add(newEnemy);
         newEnemy.SetActive(state);
         newEnemy.name = "Enemy";
-        newEnemy.GetComponent<EnemyScript>().deathSound = GetComponent<AudioSource>();
-        newEnemy.GetComponent<EnemyScript>().gm = gm;
+        EnemyScript es = newEnemy.GetComponent<EnemyScript>();
+        es.deathSound = GetComponent<AudioSource>();
+        es.coinOb = coinOb;
+        es.gm = gm;
+        es.player = player;
     }
 
     void spawnEnemy()

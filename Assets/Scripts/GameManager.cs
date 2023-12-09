@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
     public float time;
     public int lives;
+    public int coins;
     void Start()
     {
         isGameActive = true;
         lives = 3;
+        coins = 0;
     }
 
     private void Update()
