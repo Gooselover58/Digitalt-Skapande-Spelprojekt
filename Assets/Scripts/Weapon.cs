@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     public GameObject shootPoint;
     private AudioSource shootSound;
+    [SerializeField] GameManager gm;
     [SerializeField] ParticleSystem shootPar;
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
@@ -33,7 +34,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if (lr != null)
+        if (lr != null && gm.isGameActive)
         {
             Vector2 dir = transform.position - cam.ScreenToWorldPoint(Input.mousePosition);
 
