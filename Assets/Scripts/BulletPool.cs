@@ -12,12 +12,12 @@ public class BulletPool : MonoBehaviour
 
     void Start()
     {
-        CreateIBullet(bulletAmount, false, 0, Vector2.zero, 0, null, 0);
+        CreateIBullet(bulletAmount, false, 0, Vector2.zero, 0, null, 0, false);
     }
 
     //false = Bullet won't activate
     //true = Bullet will be activated
-    public void CreateIBullet(int amount, bool active, float angle, Vector2 pos, float speed, Rigidbody2D rb, int damage)
+    public void CreateIBullet(int amount, bool active, float angle, Vector2 pos, float speed, Rigidbody2D rb, int damage, bool piercing)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -27,6 +27,7 @@ public class BulletPool : MonoBehaviour
             bs.startPos = pos;
             bs.speed = speed;
             bs.damage = damage;
+            bs.piercing = piercing;
             if (rb != null)
             {
                 bs.initAngle = rb.rotation;

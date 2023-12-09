@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     public AudioSource deathSound;
+    public GameManager gm;
 
     void OnEnable()
     {
@@ -36,7 +37,6 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        deathSound.Play();
         health -= amount;
         StartCoroutine("Flash");
     }
@@ -46,5 +46,14 @@ public class EnemyScript : MonoBehaviour
         sr.color = Color.grey;
         yield return new WaitForSeconds(0.1f);
         sr.color = Color.white;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Death"))
+        {
+            gm.lives--;
+            gameObject.SetActive(false);
+        }
     }
 }

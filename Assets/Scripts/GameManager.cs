@@ -16,5 +16,18 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime;
+        if (lives < 1)
+        {
+            isGameActive = false;
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            KillYourself();
+        }
+    }
+
+    void KillYourself()
+    {
+        lives = 0;
     }
 }

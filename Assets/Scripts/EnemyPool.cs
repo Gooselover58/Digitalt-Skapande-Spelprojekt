@@ -31,6 +31,7 @@ public class EnemyPool : MonoBehaviour
         newEnemy.SetActive(state);
         newEnemy.name = "Enemy";
         newEnemy.GetComponent<EnemyScript>().deathSound = GetComponent<AudioSource>();
+        newEnemy.GetComponent<EnemyScript>().gm = gm;
     }
 
     void spawnEnemy()

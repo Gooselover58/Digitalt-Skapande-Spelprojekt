@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
         weapons.Add(startWeapon);
         rb = GetComponent<Rigidbody2D>();
         canShoot = true;
+        DisableGuns();
         SwitchGun(1);
     }
 
@@ -54,6 +55,14 @@ public class PlayerController : MonoBehaviour
         canShoot = true;
     }
     
+    void DisableGuns()
+    {
+        GameObject weap = currentGun.transform.parent.gameObject;
+        for (int i = 0; i < weap.transform.childCount; i++)
+        {
+            weap.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
     void SwitchGun(int whichGun)
     {
         foreach (Weapon w in weapons)

@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Rigidbody2D pivotRb;
     [SerializeField] Animator shootAnim;
     public float coolDown;
+    [SerializeField] bool piercing;
     [SerializeField] int damage;
     [SerializeField] float spread;
     [SerializeField] float bulletSpeed;
@@ -63,13 +64,14 @@ public class Weapon : MonoBehaviour
                     bs.speed = bulletSpeed;
                     bs.initAngle = pivotRb.rotation;
                     bs.damage = damage;
+                    bs.piercing = piercing;
                     b.SetActive(true);
                     break;
                 }
             }
             if (!foundBullet)
             {
-                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage);
+                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing);
             }
         }
         ShotEffects();
