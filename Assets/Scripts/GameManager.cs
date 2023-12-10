@@ -6,6 +6,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private int maxHealth;
+    private int health;
+    private BossScript bos;
     [SerializeField] GameObject shopUI;
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] List<Weapon> weaponsForSale;
@@ -15,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject bossUI;
     [SerializeField] GameObject bossBar;
     [SerializeField] TextMeshProUGUI bossText;
+    [SerializeField] EnemyPool ep;
     public bool isGameActive;
     public float time;
     public int lives;
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
             SetUpGuns(i);
         }
         shopUI.SetActive(false);
+        bossUI.SetActive(false);
         isGameActive = true;
         lives = 3;
         coins = 0;
@@ -34,7 +39,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (bos != null)
+        {
+            health = bos.health;
+        }
         moneyText.text = "Money: " + coins + "$";
+        bossText.text = health + "/" + maxHealth;
         time += Time.deltaTime;
         if (lives < 1)
         {
@@ -84,10 +94,21 @@ public class GameManager : MonoBehaviour
         shopUI.SetActive(false);
     }
 
-    public void StartBoss(BossScript boss, int health, string name)
+    public void StartBoss(BossScript boss, string name)
     {
+        bos = boss;
         bossUI.SetActive(true);
         bossText.text = name;
-        boss.maxHealth = health;
+        maxHealth = bos.maxHealth;
+        health = bos.maxHealth;
+        ep.isBossSpawned = true;
+        bos.opening();
+    }
+
+    public void EndBoss()
+    {
+        bossUI.SetActive(false);
+        ep.isBossSpawned = false;
+        ep.StartCoroutine("spawnEnemies");
     }
 }

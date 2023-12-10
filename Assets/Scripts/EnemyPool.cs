@@ -15,9 +15,11 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] float x;
     [SerializeField] float y;
     private float newY;
+    public bool isBossSpawned;
 
     private void Start()
     {
+        isBossSpawned = false;
         for (int i = 0; i < amount; i++)
         {
             CreateEnemy(false);
@@ -59,13 +61,14 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
-    IEnumerator spawnEnemies()
+    public IEnumerator spawnEnemies()
     {
-        while (gm.isGameActive)
+        yield return new WaitForSeconds(spawnInterval);
+        while (gm.isGameActive && !isBossSpawned)
         {
+            spawnEnemy();
             float rand = Random.Range(spawnInterval, spawnInterval + (timeBonus - (gm.time / 100)));
             yield return new WaitForSeconds(rand);
-            spawnEnemy();
         }
     }
 }
