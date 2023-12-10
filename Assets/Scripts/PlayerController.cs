@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine("ShootAndCool");
         }
+        if (weapons.Count > 9)
+        {
+            weapons.Remove(weapons[weapons.Count - 1]);
+        }
         for (int i = 1; i < weapons.Count + 1; i++)
         {
             if (Input.GetKeyDown("" + i) && gm.isGameActive)

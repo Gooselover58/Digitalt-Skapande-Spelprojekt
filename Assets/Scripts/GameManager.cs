@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<Weapon> weaponsForSale;
     [SerializeField] List<Button> buttons;
     [SerializeField] PlayerController pc;
+    [SerializeField] Gradient bossBarGradient;
+    [SerializeField] GameObject bossUI;
+    [SerializeField] GameObject bossBar;
+    [SerializeField] TextMeshProUGUI bossText;
     public bool isGameActive;
     public float time;
     public int lives;
@@ -78,5 +82,12 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         Time.timeScale = 1;
         shopUI.SetActive(false);
+    }
+
+    public void StartBoss(BossScript boss, int health, string name)
+    {
+        bossUI.SetActive(true);
+        bossText.text = name;
+        boss.maxHealth = health;
     }
 }
