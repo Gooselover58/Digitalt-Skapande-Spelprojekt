@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<Weapon> weaponsForSale;
     [SerializeField] List<Button> buttons;
     [SerializeField] PlayerController pc;
-    [SerializeField] Gradient bossBarGradient;
+    [SerializeField] GameObject bossOb;
     [SerializeField] GameObject bossUI;
-    [SerializeField] GameObject bossBar;
+    [SerializeField] Slider bossBar;
     [SerializeField] TextMeshProUGUI bossText;
+    [SerializeField] TextMeshProUGUI bossHealthText;
     [SerializeField] EnemyPool ep;
     public bool isGameActive;
     public float time;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int coins;
     void Start()
     {
+        bossOb.SetActive(false);
         Time.timeScale = 1;
         for (int i = 0; i < weaponsForSale.Count; i++)
         {
@@ -42,9 +44,10 @@ public class GameManager : MonoBehaviour
         if (bos != null)
         {
             health = bos.health;
+            bossBar.value = health;
         }
         moneyText.text = "Money: " + coins + "$";
-        bossText.text = health + "/" + maxHealth;
+        bossHealthText.text = health + "/" + maxHealth;
         time += Time.deltaTime;
         if (lives < 1)
         {
@@ -99,8 +102,10 @@ public class GameManager : MonoBehaviour
         bos = boss;
         bossUI.SetActive(true);
         bossText.text = name;
-        maxHealth = bos.maxHealth;
-        health = bos.maxHealth;
+        maxHealth = bos.baseHealth + (int)(time / 2);
+        bos.health = maxHealth;
+        health = maxHealth;
+        bossBar.maxValue = maxHealth;
         ep.isBossSpawned = true;
         bos.opening();
     }
@@ -108,7 +113,14 @@ public class GameManager : MonoBehaviour
     public void EndBoss()
     {
         bossUI.SetActive(false);
+        bossOb.SetActive(false);
         ep.isBossSpawned = false;
         ep.StartCoroutine("spawnEnemies");
+    }
+
+    IEnumerator WaitToSpawnBoss()
+    {
+        yield return new WaitForSeconds(Random.Range(70, 100));
+        bossOb.SetActive(true);
     }
 }

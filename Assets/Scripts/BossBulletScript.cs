@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class BossBulletScript : MonoBehaviour
 {
     private Rigidbody2D rb;
     public bool piercing;
@@ -24,28 +24,15 @@ public class BulletScript : MonoBehaviour
         {
             Deactivate();
         }
-        rb.MovePosition(rb.position + (Vector2)transform.right * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + -(Vector2)transform.right * speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.GetComponent<EnemyScript>() != null)
+        if (col.gameObject.GetComponent<PlayerController>() != null)
         {
-            col.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
-            if (!piercing)
-            {
-                Deactivate();
-            }
+            col.gameObject.GetComponent<PlayerController>().StartCoroutine("GetStunned");
         }
-        if (col.gameObject.GetComponent<BossScript>() != null)
-        {
-            col.gameObject.GetComponent<BossScript>().TakeDamage(damage);
-            if (!piercing)
-            {
-                Deactivate();
-            }
-        }
-
     }
 
     void Deactivate()

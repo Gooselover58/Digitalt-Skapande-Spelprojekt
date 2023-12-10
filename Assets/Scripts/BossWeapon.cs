@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class BossWeapon : MonoBehaviour
 {
     public GameObject shootPoint;
     private AudioSource shootSound;
@@ -32,25 +32,7 @@ public class Weapon : MonoBehaviour
         cam = Camera.main;
     }
 
-    void Update()
-    {
-        if (lr != null && gm.isGameActive)
-        {
-            Vector2 dir = transform.position - cam.ScreenToWorldPoint(Input.mousePosition);
-
-            RaycastHit2D hit = Physics2D.Raycast(shootPoint.transform.position, -dir, 100, layer);
-
-            if (hit.collider != null)
-            {
-                DrawLine(shootPoint.transform.position, hit.point);
-            }
-            else
-            {
-                DrawLine(shootPoint.transform.position, -dir.normalized * 100);
-            }
-        }
-    }
-    public void Shoot() 
+    public void Shoot()
     {
         for (int i = 0; i < bulletAmount; i++)
         {
@@ -73,7 +55,7 @@ public class Weapon : MonoBehaviour
             }
             if (!foundBullet)
             {
-                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing, false);
+                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing, true);
             }
         }
         ShotEffects();
@@ -84,12 +66,5 @@ public class Weapon : MonoBehaviour
         shootSound.Play();
         shootPar.Play();
         shootAnim.SetTrigger("ShootAnim");
-    }
-
-    void DrawLine(Vector2 startPos, Vector2 endPos)
-    {
-        lr.positionCount = 2;
-        lr.SetPosition(0, startPos);
-        lr.SetPosition(1, endPos);
     }
 }

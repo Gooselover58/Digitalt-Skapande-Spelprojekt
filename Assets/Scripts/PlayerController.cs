@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private bool canShoot;
+    private bool isStunned;
     [SerializeField] GameManager gm;
     [SerializeField] float moveSpeed;
     [SerializeField] Weapon startWeapon;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        isStunned = false;
         currentGun = startWeapon;
         weapons.Add(startWeapon);
         rb = GetComponent<Rigidbody2D>();
@@ -30,7 +32,10 @@ public class PlayerController : MonoBehaviour
         //Värdet ökar när man trycker upp, och minskar när man trycker ner
         float y = Input.GetAxisRaw("Vertical");
         Vector2 movement = new Vector2(0, y);
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (!isStunned)
+        {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     void Update()
@@ -85,5 +90,12 @@ public class PlayerController : MonoBehaviour
             Destroy(col.gameObject);
             gm.coins++;
         }
+    }
+
+    public IEnumerator GetStunned()
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(2);
+        isStunned = false;
     }
 }

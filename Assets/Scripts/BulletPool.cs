@@ -8,20 +8,21 @@ public class BulletPool : MonoBehaviour
 {
     public List<GameObject> bullets = new List<GameObject>();
     [SerializeField] GameObject bulletOb;
+    [SerializeField] GameObject BossBullets;
     [SerializeField] int bulletAmount;
 
     void Start()
     {
-        CreateIBullet(bulletAmount, false, 0, Vector2.zero, 0, null, 0, false);
+        CreateIBullet(bulletAmount, false, 0, Vector2.zero, 0, null, 0, false, false);
     }
 
     //false = Bullet won't activate
     //true = Bullet will be activated
-    public void CreateIBullet(int amount, bool active, float angle, Vector2 pos, float speed, Rigidbody2D rb, int damage, bool piercing)
+    public void CreateIBullet(int amount, bool active, float angle, Vector2 pos, float speed, Rigidbody2D rb, int damage, bool piercing, bool isBoss)
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject newBullet = Instantiate(bulletOb, transform.position, Quaternion.identity, transform);
+            GameObject newBullet = (!isBoss) ? Instantiate(bulletOb, transform.position, Quaternion.identity, transform) : Instantiate(BossBullets, transform.position, Quaternion.identity, transform);
             BulletScript bs = newBullet.GetComponent<BulletScript>();
             bs.angle = angle;
             bs.startPos = pos;
