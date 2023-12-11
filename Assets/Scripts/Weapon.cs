@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class Weapon : MonoBehaviour
     public float coolDown;
     public int price;
     [SerializeField] bool piercing;
-    [SerializeField] int damage;
+    [SerializeField] float damage;
     [SerializeField] float spread;
     [SerializeField] float bulletSpeed;
     [SerializeField] int bulletAmount;
@@ -65,7 +66,7 @@ public class Weapon : MonoBehaviour
                     bs.startPos = shootPoint.transform.position;
                     bs.speed = bulletSpeed;
                     bs.initAngle = pivotRb.rotation;
-                    bs.damage = damage;
+                    bs.damage = damage * gm.damageMultiplier;
                     bs.piercing = piercing;
                     b.SetActive(true);
                     break;

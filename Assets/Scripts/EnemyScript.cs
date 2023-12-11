@@ -37,9 +37,9 @@ public class EnemyScript : MonoBehaviour
         rb.MovePosition(rb.position + Vector2.left * speed * Time.fixedDeltaTime);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
-        health -= amount;
+        health -= (int)amount;
         StartCoroutine("Flash");
     }
 

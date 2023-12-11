@@ -10,13 +10,13 @@ public class BulletScript : MonoBehaviour
     public Vector2 startPos;
     public float initAngle;
     public float angle;
-    public int damage;
+    public float damage;
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         transform.position = startPos;
         rb.rotation = initAngle + Random.Range(-angle, angle);
-        StartCoroutine("lifespan");
+        StartCoroutine("lifeSpan");
     }
 
     void FixedUpdate()
