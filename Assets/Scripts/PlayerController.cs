@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && canShoot && gm.isGameActive)
+        if (Input.GetKey(KeyCode.Space) && canShoot && gm.isGameActive && !isStunned)
         {
             StartCoroutine("ShootAndCool");
         }

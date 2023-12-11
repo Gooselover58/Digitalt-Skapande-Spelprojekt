@@ -5559,7 +5559,7 @@ MonoBehaviour:
   coolDown: 1
   price: 0
   piercing: 0
-  damage: 20
+  damage: 8
   spread: 0
   bulletSpeed: 10
   bulletAmount: 1
@@ -7006,9 +7006,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 589201631}
   moveSpeed: 10
-  startWeapon: {fileID: 1234993650}
+  startWeapon: {fileID: 182421256}
   weapons: []
-  currentGun: {fileID: 1234993650}
+  currentGun: {fileID: 182421256}
 --- !u!1 &920966686
 GameObject:
   m_ObjectHideFlags: 0
@@ -7432,10 +7432,10 @@ MonoBehaviour:
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 958506764}
-  coolDown: 1
+  coolDown: 1.5
   price: 100
   piercing: 1
-  damage: 50
+  damage: 40
   spread: 0
   bulletSpeed: 50
   bulletAmount: 1
@@ -7902,11 +7902,11 @@ MonoBehaviour:
   shootPar: {fileID: 0}
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 990602865}
-  coolDown: 0.6
-  price: 30
+  coolDown: 0.8
+  price: 20
   piercing: 0
-  damage: 30
-  spread: 0
+  damage: 12
+  spread: 1
   bulletSpeed: 15
   bulletAmount: 1
   bPool: {fileID: 1984755081}
@@ -18859,12 +18859,12 @@ MonoBehaviour:
   pivotRb: {fileID: 414208661}
   shootAnim: {fileID: 1234993651}
   coolDown: 1
-  price: 70
+  price: 50
   piercing: 0
-  damage: 5
+  damage: 2
   spread: 10
   bulletSpeed: 15
-  bulletAmount: 8
+  bulletAmount: 10
   bPool: {fileID: 1984755081}
   layer:
     serializedVersion: 2
@@ -18901,7 +18901,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 33093f384befba54b8087432f2462a63, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
