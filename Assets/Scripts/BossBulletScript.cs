@@ -16,6 +16,7 @@ public class BossBulletScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.position = startPos;
         rb.rotation = initAngle + Random.Range(-angle, angle);
+        StartCoroutine("lifespan");
     }
 
     void FixedUpdate()

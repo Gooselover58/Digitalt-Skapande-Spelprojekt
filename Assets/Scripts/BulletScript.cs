@@ -16,6 +16,7 @@ public class BulletScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         transform.position = startPos;
         rb.rotation = initAngle + Random.Range(-angle, angle);
+        StartCoroutine("lifespan");
     }
 
     void FixedUpdate()

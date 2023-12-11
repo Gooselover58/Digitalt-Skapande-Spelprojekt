@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaitToSpawnBoss()
     {
-        yield return new WaitForSeconds(Random.Range(10, 12));
+        yield return new WaitForSeconds(Random.Range(30, 50));
         bossOb.SetActive(true);
     }
 

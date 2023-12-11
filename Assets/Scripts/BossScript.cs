@@ -67,7 +67,7 @@ public class BossScript : MonoBehaviour
     {
         while (!isImmortal)
         {
-            yield return new WaitForSeconds(Random.Range(3, 7));
+            yield return new WaitForSeconds(Random.Range(1, 3));
             actualGun.Shoot();
         }
     }
