@@ -32,11 +32,11 @@ public class BossScript : MonoBehaviour
         StartCoroutine("MoveIn");
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (!isImmortal)
         {
-            health -= amount;
+            health -= (int)amount;
             if (health <= 0)
             {
                 die();

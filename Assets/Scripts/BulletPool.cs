@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class BulletPool : MonoBehaviour
 {
     public List<GameObject> bullets = new List<GameObject>();
+    [SerializeField] GameManager gm;
     [SerializeField] GameObject shootPoint;
     [SerializeField] GameObject bulletOb;
     [SerializeField] GameObject BossBullets;
@@ -19,7 +20,7 @@ public class BulletPool : MonoBehaviour
 
     //false = Bullet won't activate
     //true = Bullet will be activated
-    public void CreateIBullet(int amount, bool active, float angle, Vector2 pos, float speed, Rigidbody2D rb, int damage, bool piercing, bool isBoss)
+    public void CreateIBullet(int amount, bool active, float angle, Vector2 pos, float speed, Rigidbody2D rb, float damage, bool piercing, bool isBoss)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -30,7 +31,7 @@ public class BulletPool : MonoBehaviour
                 bs.angle = angle;
                 bs.startPos = pos;
                 bs.speed = speed;
-                bs.damage = damage;
+                bs.damage = damage * gm.damageMultiplier;
                 bs.piercing = piercing;
                 if (rb != null)
                 {

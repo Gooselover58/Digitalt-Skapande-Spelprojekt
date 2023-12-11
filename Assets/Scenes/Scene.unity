@@ -6480,6 +6480,7 @@ MonoBehaviour:
   bossHealthText: {fileID: 1060235289}
   ep: {fileID: 1615331194}
   GameOverUI: {fileID: 1146994914}
+  damageMultiplier: 0
   isGameActive: 0
   time: 0
   lives: 0
@@ -25690,6 +25691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullets: []
+  gm: {fileID: 589201631}
   shootPoint: {fileID: 264655335}
   bulletOb: {fileID: 5850340894253248876, guid: 095d6f6f8bb5b854da6c1a610da555b2, type: 3}
   BossBullets: {fileID: 7239259207679503482, guid: 0d09a03c93be20e4e8687a36a65b8a53, type: 3}

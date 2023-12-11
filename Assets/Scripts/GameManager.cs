@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bossHealthText;
     [SerializeField] EnemyPool ep;
     [SerializeField] GameObject GameOverUI;
+    public float damageMultiplier;
     public bool isGameActive;
     public float time;
     public int lives;
