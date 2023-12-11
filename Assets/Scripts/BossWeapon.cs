@@ -37,22 +37,6 @@ public class BossWeapon : MonoBehaviour
         for (int i = 0; i < bulletAmount; i++)
         {
             bool foundBullet = false;
-            foreach (GameObject b in bPool.bullets)
-            {
-                if (!b.activeSelf)
-                {
-                    foundBullet = true;
-                    BulletScript bs = b.GetComponent<BulletScript>();
-                    bs.angle = spread;
-                    bs.startPos = shootPoint.transform.position;
-                    bs.speed = bulletSpeed;
-                    bs.initAngle = pivotRb.rotation;
-                    bs.damage = damage;
-                    bs.piercing = piercing;
-                    b.SetActive(true);
-                    break;
-                }
-            }
             if (!foundBullet)
             {
                 bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing, true);

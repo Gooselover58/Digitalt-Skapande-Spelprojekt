@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class BulletPool : MonoBehaviour
 {
     public List<GameObject> bullets = new List<GameObject>();
+    [SerializeField] GameObject shootPoint;
     [SerializeField] GameObject bulletOb;
     [SerializeField] GameObject BossBullets;
     [SerializeField] int bulletAmount;
@@ -22,19 +23,37 @@ public class BulletPool : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject newBullet = (!isBoss) ? Instantiate(bulletOb, transform.position, Quaternion.identity, transform) : Instantiate(BossBullets, transform.position, Quaternion.identity, transform);
-            BulletScript bs = newBullet.GetComponent<BulletScript>();
-            bs.angle = angle;
-            bs.startPos = pos;
-            bs.speed = speed;
-            bs.damage = damage;
-            bs.piercing = piercing;
-            if (rb != null)
+            GameObject newBullet = (!isBoss) ? Instantiate(bulletOb, transform.position, Quaternion.identity, transform) : Instantiate(BossBullets, shootPoint.transform.position, Quaternion.identity, transform);
+            if (!isBoss)
             {
-                bs.initAngle = rb.rotation;
+                BulletScript bs = newBullet.GetComponent<BulletScript>();
+                bs.angle = angle;
+                bs.startPos = pos;
+                bs.speed = speed;
+                bs.damage = damage;
+                bs.piercing = piercing;
+                if (rb != null)
+                {
+                    bs.initAngle = rb.rotation;
+                }
+                newBullet.SetActive(active);
+                bullets.Add(newBullet);
             }
-            newBullet.SetActive(active);
-            bullets.Add(newBullet);
+            else
+            {
+                BossBulletScript bs = newBullet.GetComponent<BossBulletScript>();
+                bs.angle = angle;
+                bs.startPos = shootPoint.transform.position;
+                bs.speed = speed;
+                bs.damage = damage;
+                bs.piercing = piercing;
+                if (rb != null)
+                {
+                    bs.initAngle = rb.rotation;
+                }
+                newBullet.SetActive(true);
+
+            }
         }
     }
 }

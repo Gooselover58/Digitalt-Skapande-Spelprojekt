@@ -14,7 +14,7 @@ public class BossBulletScript : MonoBehaviour
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
-        transform.position = startPos;
+        rb.position = startPos;
         rb.rotation = initAngle + Random.Range(-angle, angle);
     }
 
@@ -27,18 +27,19 @@ public class BossBulletScript : MonoBehaviour
         rb.MovePosition(rb.position + -(Vector2)transform.right * speed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.GetComponent<PlayerController>() != null)
         {
             col.gameObject.GetComponent<PlayerController>().StartCoroutine("GetStunned");
+            Deactivate();
         }
     }
 
     void Deactivate()
     {
         StopAllCoroutines();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     IEnumerator lifeSpan()

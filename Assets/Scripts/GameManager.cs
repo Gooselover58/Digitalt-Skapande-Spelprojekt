@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bossText;
     [SerializeField] TextMeshProUGUI bossHealthText;
     [SerializeField] EnemyPool ep;
+    [SerializeField] GameObject GameOverUI;
     public bool isGameActive;
     public float time;
     public int lives;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         bossOb.SetActive(false);
+        GameOverUI.SetActive(false);
         Time.timeScale = 1;
         for (int i = 0; i < weaponsForSale.Count; i++)
         {
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         lives = 3;
         coins = 0;
+        StartCoroutine("WaitToSpawnBoss");
     }
 
     private void Update()
@@ -52,12 +56,13 @@ public class GameManager : MonoBehaviour
         if (lives < 1)
         {
             isGameActive = false;
+            EndGame();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
             KillYourself();
         }
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H) && isGameActive)
         {
             OpenShop();
         }
@@ -116,11 +121,28 @@ public class GameManager : MonoBehaviour
         bossOb.SetActive(false);
         ep.isBossSpawned = false;
         ep.StartCoroutine("spawnEnemies");
+        StartCoroutine("WaitToSpawnBoss");
     }
 
     IEnumerator WaitToSpawnBoss()
     {
-        yield return new WaitForSeconds(Random.Range(70, 100));
+        yield return new WaitForSeconds(Random.Range(10, 12));
         bossOb.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    void EndGame()
+    {
+        GameOverUI.SetActive(true);
+        Time.timeScale = 0;
     }
 }

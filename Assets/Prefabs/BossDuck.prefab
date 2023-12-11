@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7204171414575968451
 Transform:
   m_ObjectHideFlags: 0
@@ -173,6 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: {x: 12, y: 0, z: 0}
   gm: {fileID: 0}
+  bossGun: {fileID: 0}
+  actualGun: {fileID: 0}
   isImmortal: 0
   baseHealth: 100
   maxHealth: 0
