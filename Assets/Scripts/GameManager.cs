@@ -89,6 +89,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DamageUpgrade()
+    {
+        damageMultiplier += 0.25f;
+    }
+
     public void OpenShop()
     {
         isGameActive = false;

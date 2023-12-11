@@ -6480,7 +6480,7 @@ MonoBehaviour:
   bossHealthText: {fileID: 1060235289}
   ep: {fileID: 1615331194}
   GameOverUI: {fileID: 1146994914}
-  damageMultiplier: 0
+  damageMultiplier: 1
   isGameActive: 0
   time: 0
   lives: 0
