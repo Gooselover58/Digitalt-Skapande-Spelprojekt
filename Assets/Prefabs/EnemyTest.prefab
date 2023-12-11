@@ -268,5 +268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b94358cac01df648a6d5b0b0c3dd0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coins: 3
   initialHealth: 50
   speed: 1
+  player: {fileID: 0}
+  coinOb: {fileID: 0}
+  deathSound: {fileID: 0}
+  gm: {fileID: 0}

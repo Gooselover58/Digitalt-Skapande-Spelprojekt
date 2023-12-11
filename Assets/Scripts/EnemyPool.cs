@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     List<GameObject> enemies = new List<GameObject>();
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject coinOb;
     [SerializeField] GameObject enemyOb;
     [SerializeField] GameManager gm;
     [SerializeField] int amount;
@@ -13,9 +15,11 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] float x;
     [SerializeField] float y;
     private float newY;
+    public bool isBossSpawned;
 
     private void Start()
     {
+        isBossSpawned = false;
         for (int i = 0; i < amount; i++)
         {
             CreateEnemy(false);
@@ -30,7 +34,11 @@ public class EnemyPool : MonoBehaviour
         enemies.Add(newEnemy);
         newEnemy.SetActive(state);
         newEnemy.name = "Enemy";
-        newEnemy.GetComponent<EnemyScript>().deathSound = GetComponent<AudioSource>();
+        EnemyScript es = newEnemy.GetComponent<EnemyScript>();
+        es.deathSound = GetComponent<AudioSource>();
+        es.coinOb = coinOb;
+        es.gm = gm;
+        es.player = player;
     }
 
     void spawnEnemy()
@@ -53,13 +61,14 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
-    IEnumerator spawnEnemies()
+    public IEnumerator spawnEnemies()
     {
-        while (gm.isGameActive)
+        yield return new WaitForSeconds(spawnInterval);
+        while (gm.isGameActive && !isBossSpawned)
         {
+            spawnEnemy();
             float rand = Random.Range(spawnInterval, spawnInterval + (timeBonus - (gm.time / 100)));
             yield return new WaitForSeconds(rand);
-            spawnEnemy();
         }
     }
 }

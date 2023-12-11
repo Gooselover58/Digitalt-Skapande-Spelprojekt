@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Death
+  - Blockade
   layers:
   - Default
   - TransparentFX
@@ -11,9 +13,9 @@ TagManager:
   - BackGround
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Bullets
+  - Coins
+  - Guns
   - 
   - 
   - 

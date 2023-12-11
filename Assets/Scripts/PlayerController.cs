@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private bool canShoot;
+    private bool isStunned;
+    [SerializeField] GameManager gm;
     [SerializeField] float moveSpeed;
     [SerializeField] Weapon startWeapon;
     public List<Weapon> weapons;
@@ -15,10 +17,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        isStunned = false;
         currentGun = startWeapon;
         weapons.Add(startWeapon);
         rb = GetComponent<Rigidbody2D>();
         canShoot = true;
+        DisableGuns();
         SwitchGun(1);
     }
 
@@ -28,18 +32,25 @@ public class PlayerController : MonoBehaviour
         //Värdet ökar när man trycker upp, och minskar när man trycker ner
         float y = Input.GetAxisRaw("Vertical");
         Vector2 movement = new Vector2(0, y);
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (!isStunned)
+        {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && canShoot)
+        if (Input.GetKey(KeyCode.Space) && canShoot && gm.isGameActive)
         {
             StartCoroutine("ShootAndCool");
         }
+        if (weapons.Count > 9)
+        {
+            weapons.Remove(weapons[weapons.Count - 1]);
+        }
         for (int i = 1; i < weapons.Count + 1; i++)
         {
-            if (Input.GetKeyDown("" + i))
+            if (Input.GetKeyDown("" + i) && gm.isGameActive)
             {
                 SwitchGun(i);
             }
@@ -54,7 +65,15 @@ public class PlayerController : MonoBehaviour
         canShoot = true;
     }
     
-    void SwitchGun(int whichGun)
+    void DisableGuns()
+    {
+        GameObject weap = currentGun.transform.parent.gameObject;
+        for (int i = 0; i < weap.transform.childCount; i++)
+        {
+            weap.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+    public void SwitchGun(int whichGun)
     {
         foreach (Weapon w in weapons)
         {
@@ -62,5 +81,21 @@ public class PlayerController : MonoBehaviour
         }
         weapons[whichGun - 1].gameObject.SetActive(true); 
         currentGun = weapons[whichGun - 1];
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.GetComponent<CoinScript>() != null)
+        {
+            Destroy(col.gameObject);
+            gm.coins++;
+        }
+    }
+
+    public IEnumerator GetStunned()
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(2);
+        isStunned = false;
     }
 }

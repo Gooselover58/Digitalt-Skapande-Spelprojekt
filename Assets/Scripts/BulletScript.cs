@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public bool piercing;
     public float speed;
     public Vector2 startPos;
     public float initAngle;
@@ -21,7 +22,7 @@ public class BulletScript : MonoBehaviour
     {
         if (!GetComponent<SpriteRenderer>().isVisible)
         {
-            gameObject.SetActive(false);
+            Deactivate();
         }
         rb.MovePosition(rb.position + (Vector2)transform.right * speed * Time.fixedDeltaTime);
     }
@@ -31,6 +32,31 @@ public class BulletScript : MonoBehaviour
         if (col.gameObject.GetComponent<EnemyScript>() != null)
         {
             col.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
+            if (!piercing)
+            {
+                Deactivate();
+            }
         }
+        if (col.gameObject.GetComponent<BossScript>() != null)
+        {
+            col.gameObject.GetComponent<BossScript>().TakeDamage(damage);
+            if (!piercing)
+            {
+                Deactivate();
+            }
+        }
+
+    }
+
+    void Deactivate()
+    {
+        StopAllCoroutines();
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator lifeSpan()
+    {
+        yield return new WaitForSeconds(5);
+        Deactivate();
     }
 }

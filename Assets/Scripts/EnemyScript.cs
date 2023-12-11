@@ -5,12 +5,16 @@ using UnityEngine.Timeline;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField] int coins;
     [SerializeField] int initialHealth;
     [SerializeField] float speed;
     private int health;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    public GameObject player;
+    public GameObject coinOb;
     public AudioSource deathSound;
+    public GameManager gm;
 
     void OnEnable()
     {
@@ -24,8 +28,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (health < 1)
         {
-            deathSound.PlayOneShot(deathSound.clip);
-            gameObject.SetActive(false);
+            Die();
         }
     }
 
@@ -36,7 +39,6 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        deathSound.Play();
         health -= amount;
         StartCoroutine("Flash");
     }
@@ -46,5 +48,26 @@ public class EnemyScript : MonoBehaviour
         sr.color = Color.grey;
         yield return new WaitForSeconds(0.1f);
         sr.color = Color.white;
+    }
+
+    void Die()
+    {
+        int coinAmount = Random.Range(coins, coins + 3);
+        for (int i = 0; i < coinAmount; i++)
+        {
+            GameObject newCoin = Instantiate(coinOb, transform.position, Quaternion.identity);
+            newCoin.GetComponent<CoinScript>().player = player;
+        }
+        deathSound.PlayOneShot(deathSound.clip);
+        gameObject.SetActive(false);
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Death"))
+        {
+            gm.lives--;
+            gameObject.SetActive(false);
+        }
     }
 }
