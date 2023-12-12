@@ -14,7 +14,7 @@ public class BossBulletScript : MonoBehaviour
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.position = startPos;
+        transform.position = startPos;
         rb.rotation = initAngle + Random.Range(-angle, angle);
         StartCoroutine("lifeSpan");
     }
@@ -45,7 +45,7 @@ public class BossBulletScript : MonoBehaviour
 
     IEnumerator lifeSpan()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         Deactivate();
     }
 }

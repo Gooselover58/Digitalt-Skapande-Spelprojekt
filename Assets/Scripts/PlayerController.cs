@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool canShoot;
     private bool isStunned;
+    [SerializeField] int bulletsToSpawn;
+    [SerializeField] BulletPool bp;
     [SerializeField] GameManager gm;
     [SerializeField] float moveSpeed;
     [SerializeField] Weapon startWeapon;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        bp.CreateIBullet(bulletsToSpawn, false, 0, currentGun.transform.GetChild(0).gameObject.transform.position, 0, null, 0, false, false);
         isStunned = false;
         currentGun = startWeapon;
         weapons.Add(startWeapon);

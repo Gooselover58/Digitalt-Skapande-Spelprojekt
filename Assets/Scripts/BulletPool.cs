@@ -11,12 +11,6 @@ public class BulletPool : MonoBehaviour
     [SerializeField] GameObject shootPoint;
     [SerializeField] GameObject bulletOb;
     [SerializeField] GameObject BossBullets;
-    [SerializeField] int bulletAmount;
-
-    void Start()
-    {
-        CreateIBullet(bulletAmount, false, 0, Vector2.zero, 0, null, 0, false, false);
-    }
 
     //false = Bullet won't activate
     //true = Bullet will be activated

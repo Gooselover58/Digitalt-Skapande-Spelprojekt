@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b94358cac01df648a6d5b0b0c3dd0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 3
+  coins: 20
   initialHealth: 30
   speed: 1
   player: {fileID: 0}

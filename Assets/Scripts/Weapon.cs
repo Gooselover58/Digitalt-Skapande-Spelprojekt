@@ -74,7 +74,8 @@ public class Weapon : MonoBehaviour
             }
             if (!foundBullet)
             {
-                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing, false);
+                bPool.CreateIBullet(bulletAmount, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing, false);
+                break;
             }
         }
         ShotEffects();

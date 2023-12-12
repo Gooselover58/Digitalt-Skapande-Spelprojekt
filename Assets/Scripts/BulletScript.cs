@@ -28,7 +28,7 @@ public class BulletScript : MonoBehaviour
         rb.MovePosition(rb.position + (Vector2)transform.right * speed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    /*private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.GetComponent<EnemyScript>() != null)
         {
@@ -46,10 +46,9 @@ public class BulletScript : MonoBehaviour
                 Deactivate();
             }
         }
+    }*/
 
-    }
-
-    void Deactivate()
+    public void Deactivate()
     {
         StopAllCoroutines();
         gameObject.SetActive(false);

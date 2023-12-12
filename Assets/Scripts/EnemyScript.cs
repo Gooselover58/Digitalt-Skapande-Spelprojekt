@@ -64,6 +64,15 @@ public class EnemyScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.GetComponent<BulletScript>() != null)
+        {
+            BulletScript bs2 = col.gameObject.GetComponent<BulletScript>();
+            TakeDamage(bs2.damage);
+            if (!bs2.piercing)
+            {
+                bs2.Deactivate();
+            }
+        }
         if (col.gameObject.CompareTag("Death"))
         {
             gm.lives--;

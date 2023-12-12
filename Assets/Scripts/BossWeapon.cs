@@ -36,11 +36,7 @@ public class BossWeapon : MonoBehaviour
     {
         for (int i = 0; i < bulletAmount; i++)
         {
-            bool foundBullet = false;
-            if (!foundBullet)
-            {
-                bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing, true);
-            }
+            bPool.CreateIBullet(1, true, spread, shootPoint.transform.position, bulletSpeed, pivotRb, damage, piercing, true);
         }
         ShotEffects();
     }

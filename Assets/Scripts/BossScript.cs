@@ -71,4 +71,17 @@ public class BossScript : MonoBehaviour
             actualGun.Shoot();
         }
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.GetComponent<BulletScript>() != null)
+        {
+            BulletScript bs2 = col.gameObject.GetComponent<BulletScript>();
+            TakeDamage(bs2.damage);
+            if (!bs2.piercing)
+            {
+                bs2.Deactivate();
+            }
+        }
+    }
 }
