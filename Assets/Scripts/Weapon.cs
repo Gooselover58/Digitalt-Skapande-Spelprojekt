@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Animator shootAnim;
     public float coolDown;
     public int price;
-    [SerializeField] bool canShoot;
+    public bool canShoot;
     [SerializeField] bool piercing;
     [SerializeField] float damage;
     [SerializeField] float spread;
@@ -54,16 +54,12 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public IEnumerator ShootAndCool()
+    /*public IEnumerator BackUpReload()
     {
-        if (canShoot)
-        {
-            canShoot = false;
-            Shoot();
-            yield return new WaitForSeconds(coolDown);
-            canShoot = true;
-        }
-    }
+        StopCoroutine("ShootAndCool");
+        yield return new WaitForSeconds(coolDown);
+        canShoot = true;
+    }*/
     public void Shoot() 
     {
         for (int i = 0; i < bulletAmount; i++)

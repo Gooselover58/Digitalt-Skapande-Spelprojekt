@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: "Assets/Scenes/Anv\xE4ndaScener/StartSk\xE4rm.unity"
+    guid: bd498e104a2abdf4a8788fe406825d7c
+  - enabled: 1
+    path: "Assets/Scenes/Anv\xE4ndaScener/Spel.unity"
+    guid: 0fd27624b4d938549aedc7d11306270d
   m_configObjects: {}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -41,10 +42,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && gm.isGameActive && !isStunned)
+        if (Input.GetKey(KeyCode.Space) && currentGun.canShoot && gm.isGameActive && !isStunned)
         {
-            ShootThenCool();
+            StartCoroutine("ShootAndCool");
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentGun.canShoot = true;
+        }
+        /*if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentGun.StartCoroutine("BackUpReload");
+        }*/
         if (weapons.Count > 9)
         {
             weapons.Remove(weapons[weapons.Count - 1]);
@@ -58,9 +67,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ShootThenCool()
+    IEnumerator ShootAndCool()
     {
-        currentGun.StartCoroutine("ShootAndCool");
+        currentGun.canShoot = false;
+        currentGun.Shoot();
+        yield return new WaitForSeconds(currentGun.coolDown);
+        currentGun.canShoot = true;
     }
     
     void DisableGuns()
