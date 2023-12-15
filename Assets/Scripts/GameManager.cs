@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] List<Weapon> weaponsForSale;
     [SerializeField] List<Button> buttons;
+    [SerializeField] Button damageButton;
+    [SerializeField] TextMeshProUGUI damageText;
+    [SerializeField] int damagePrice;
     [SerializeField] PlayerController pc;
     [SerializeField] GameObject bossOb;
     [SerializeField] GameObject bossUI;
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         bossOb.SetActive(false);
         GameOverUI.SetActive(false);
+        damagePrice = 30;
         Time.timeScale = 1;
         for (int i = 0; i < weaponsForSale.Count; i++)
         {
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
             health = bos.health;
             bossBar.value = health;
         }
+        damageText.text = damagePrice + "$";
         moneyText.text = "Money: " + coins + "$";
         bossHealthText.text = health + "/" + maxHealth;
         time += Time.deltaTime;
@@ -91,7 +96,12 @@ public class GameManager : MonoBehaviour
 
     public void DamageUpgrade()
     {
-        damageMultiplier += 0.25f;
+        if (coins >= damagePrice)
+        {
+            coins -= damagePrice;
+            damageMultiplier += 0.25f;
+            damagePrice *= 2;
+        }
     }
 
     public void OpenShop()
