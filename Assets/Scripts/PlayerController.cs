@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private bool canShoot;
     private bool isStunned;
     [SerializeField] int bulletsToSpawn;
     [SerializeField] BulletPool bp;
@@ -24,7 +23,6 @@ public class PlayerController : MonoBehaviour
         currentGun = startWeapon;
         weapons.Add(startWeapon);
         rb = GetComponent<Rigidbody2D>();
-        canShoot = true;
         DisableGuns();
         SwitchGun(1);
     }
@@ -43,9 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && canShoot && gm.isGameActive && !isStunned)
+        if (Input.GetKey(KeyCode.Space) && gm.isGameActive && !isStunned)
         {
-            StartCoroutine("ShootAndCool");
+            ShootThenCool();
         }
         if (weapons.Count > 9)
         {
@@ -60,12 +58,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator ShootAndCool()
+    void ShootThenCool()
     {
-        canShoot = false;
-        currentGun.Shoot();
-        yield return new WaitForSeconds(currentGun.coolDown);
-        canShoot = true;
+        currentGun.StartCoroutine("ShootAndCool");
     }
     
     void DisableGuns()

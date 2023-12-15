@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Animator shootAnim;
     public float coolDown;
     public int price;
+    [SerializeField] bool canShoot;
     [SerializeField] bool piercing;
     [SerializeField] float damage;
     [SerializeField] float spread;
@@ -26,6 +27,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+        canShoot = true;
         shootSound = GetComponent<AudioSource>();
         shootPoint = transform.GetChild(0).gameObject;
         shootPar = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
@@ -49,6 +51,17 @@ public class Weapon : MonoBehaviour
             {
                 DrawLine(shootPoint.transform.position, -dir.normalized * 100);
             }
+        }
+    }
+
+    public IEnumerator ShootAndCool()
+    {
+        if (canShoot)
+        {
+            canShoot = false;
+            Shoot();
+            yield return new WaitForSeconds(coolDown);
+            canShoot = true;
         }
     }
     public void Shoot() 
